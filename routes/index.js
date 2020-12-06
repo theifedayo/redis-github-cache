@@ -14,11 +14,10 @@ const index = require('../controllers/index')
 
 
 /* GET home page. */
-router.get('/', (req, res)=>{
-	res.render('index', {csrfToken: req.csrfToken()})
-});
+router.get('/', index.getHome);
 
+router.post('/', index.postHome);
 
-router.get('/repos/:username', index.getRepos)
+router.get('/repos/:username', index.cache, index.getRepos)
 
 module.exports = router;

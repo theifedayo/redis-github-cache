@@ -9,6 +9,8 @@ const fetch = require('node-fetch')
 const redis = require('redis')
 const dotenv = require('dotenv')
 const session = require('express-session')
+const responseTime = require('response-time')
+
 
 
 
@@ -38,6 +40,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use(responseTime((req, res, time, next)=>{
+  res.locals.time = time
+}))
 
 
 
