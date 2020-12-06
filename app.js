@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
+const fetch = require('node-fetch')
+const redis = require('redis')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -39,5 +41,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const PORT = process.env.PORT || 3000
+const REDIS_PORT = process.env.PORT || 6379
+
+const client = redis.createClient(REDIS_PORT)
+
+app.listen(PORT, ()=>{
+	console.log(`Server running on port: ${PORT}`)
+})
 
 module.exports = app;
