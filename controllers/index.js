@@ -24,7 +24,7 @@ exports.cache = (req, res, next)=>{
 		if(data != null){
 			const endcache = new Date()
 			const endcacheT = endcache.getTime()
-			responseT = endcacheT - startcacheT
+			responseT = (endcacheT - startcacheT)*100
 			res.render('repos', {username: username, repos: data, responseT: responseT})
 		}else {
 			next()
@@ -69,7 +69,7 @@ exports.getRepos = async (req, res)=>{
 		        const end = new Date()
 				const endMill = end.getTime()
 				console.log(endMill)
-				responseT = endMill - startMill 
+				responseT = (endMill - startMill)*100
 				res.render('repos', {username: username, repos: repos, responseT: responseT})
 		    }
 		})
