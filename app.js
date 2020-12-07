@@ -39,11 +39,11 @@ app.use(session({
   //   port: 6379,
   //   client: redis
   // }),
-  cookie:{
-    secure: true,
-    maxAge:60000
-       },
-  store: new RedisStore()
+  // cookie:{
+  //   secure: true,
+  //   maxAge:60000
+  //      },
+  // store: new RedisStore(),
 	secret: process.env.SESSION_SECRET,
 	saveUninitialized: false,
 	resave: true,
