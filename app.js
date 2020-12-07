@@ -34,17 +34,8 @@ app.use(cookieParser(process.env.SESSION_SECRET));
 app.set('trust proxy', 1);
 
 app.use(session({
-  // store: new RedisStore({
-  //   host: "localhost",
-  //   port: 6379,
-  //   client: redis
-  // }),
-  // cookie:{
-  //   secure: true,
-  //   maxAge:60000
-  //      },
-  // store: new RedisStore(),
-	secret: process.env.SESSION_SECRET,
+
+	secret: 'calm',
 	saveUninitialized: false,
 	resave: true,
 }))
