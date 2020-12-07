@@ -41,9 +41,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use(responseTime((req, res, time, next)=>{
-  res.locals.time = time
-}))
 
 
 
@@ -64,7 +61,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 5000
 const REDIS_PORT = process.env.REDIS_PORT || 6379
 
 const client = redis.createClient(REDIS_PORT)
@@ -73,4 +70,3 @@ app.listen(PORT, ()=>{
 	console.log(`Server running on port: ${PORT}`)
 })
 
-module.exports = app;
