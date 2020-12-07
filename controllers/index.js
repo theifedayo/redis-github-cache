@@ -68,6 +68,6 @@ exports.getRepos = async (req, res)=>{
 		responseT = endMill - startMill 
 		res.render('repos', {username: username, repos: repos, responseT: responseT})
 	}catch(err){
-		console.log(err)
+		res.render('500')
 	}
 }
