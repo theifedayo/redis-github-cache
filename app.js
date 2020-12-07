@@ -30,12 +30,20 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.set('trust proxy', 1);
+
 app.use(session({
   // store: new RedisStore({
   //   host: "localhost",
   //   port: 6379,
   //   client: redis
   // }),
+  cookie:{
+    secure: true,
+    maxAge:60000
+       },
+  store: new RedisStore()
 	secret: process.env.SESSION_SECRET,
 	saveUninitialized: false,
 	resave: true,
@@ -70,8 +78,8 @@ app.use(function(err, req, res, next) {
 
 if (process.env.REDISTOGO_URL) {
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-  // var redis = require("redis").createClient(rtg.port, rtg.hostname);
-   var client = redis.createClient(rtg.port, rtg.hostname);
+  var redis = require("redis").createClient(rtg.port, rtg.hostname);
+   // var client = redis.createClient(rtg.port, rtg.hostname);
 
   redis.auth(rtg.auth.split(":")[1]);
 } else {
