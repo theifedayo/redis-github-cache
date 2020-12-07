@@ -10,6 +10,7 @@ const redis = require('redis')
 const dotenv = require('dotenv')
 const session = require('express-session')
 const responseTime = require('response-time')
+var RedisStore = require("connect-redis")(session)
 
 
 
@@ -30,6 +31,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
+  // store: new RedisStore({
+  //   host: "localhost",
+  //   port: 6379,
+  //   client: redis
+  // }),
 	secret: process.env.SESSION_SECRET,
 	saveUninitialized: false,
 	resave: true,
@@ -61,10 +67,24 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const PORT = process.env.PORT || 5000
-const REDIS_PORT = process.env.REDIS_PORT || 6379
 
-const client = redis.createClient(REDIS_PORT)
+if (process.env.REDISTOGO_URL) {
+  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  // var redis = require("redis").createClient(rtg.port, rtg.hostname);
+   var client = redis.createClient(rtg.port, rtg.hostname);
+
+  redis.auth(rtg.auth.split(":")[1]);
+} else {
+  const REDIS_PORT = process.env.REDIS_PORT || 6379
+  // var redis = require("redis").createClient();
+  const client = redis.createClient(REDIS_PORT)
+}
+
+const redisAuth = process.env.REDIS_AUTH || null
+const PORT = process.env.PORT || 5000
+// const REDIS_PORT = process.env.REDIS_PORT || 6379
+
+
 
 app.listen(PORT, ()=>{
 	console.log(`Server running on port: ${PORT}`)
