@@ -76,10 +76,10 @@ app.use(function(err, req, res, next) {
 });
 
 
-if (process.env.REDISTOGO_URL) {
-  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-  var redis = require("redis").createClient(rtg.port, rtg.hostname);
-   // var client = redis.createClient(rtg.port, rtg.hostname);
+if (process.env.REDIS_URL) {
+  // var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  // var redis = require("redis").createClient(rtg.port, rtg.hostname);
+  var client = require('redis').createClient(process.env.REDIS_URL)
 
   redis.auth(rtg.auth.split(":")[1]);
 } else {
