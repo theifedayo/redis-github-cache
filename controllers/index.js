@@ -60,13 +60,19 @@ exports.getRepos = async (req, res)=>{
 
 		const repos = data.public_repos
 
-		client.setex(username, 5400, repos)
-
-		const end = new Date()
-		const endMill = end.getTime()
-		console.log(endMill)
-		responseT = endMill - startMill 
-		res.render('repos', {username: username, repos: repos, responseT: responseT})
+		client.setex(username, 5400, repos, (err, reply) => {
+		    if (err) {
+		        console.error(err);
+		        res.render('500')
+		    } else {
+		        console.debug(reply);
+		        const end = new Date()
+				const endMill = end.getTime()
+				console.log(endMill)
+				responseT = endMill - startMill 
+				res.render('repos', {username: username, repos: repos, responseT: responseT})
+		    }
+		})
 	}catch(err){
 		res.render('500')
 	}
