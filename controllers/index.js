@@ -15,7 +15,7 @@ exports.cache = (req, res, next)=>{
 	const startcacheT = startcache.getTime()
 	const { username } = req.params
 
-	const REDIS_PORT = process.env.PORT || 6379
+	const REDIS_PORT = process.env.REDIS_URL || 6379
 
 	const client = redis.createClient(REDIS_PORT)
 
@@ -52,7 +52,7 @@ exports.getRepos = async (req, res)=>{
 		console.log(username,'xxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 		const response = await fetch(`https://api.github.com/users/${username}`)
 
-		const REDIS_PORT = process.env.PORT || 6379
+		const REDIS_PORT = process.env.REDIS_URL || 6379
 
 		const client = redis.createClient(REDIS_PORT)
 

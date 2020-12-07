@@ -76,21 +76,23 @@ app.use(function(err, req, res, next) {
 });
 
 
-if (process.env.REDIS_URL) {
-  // var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-  // var redis = require("redis").createClient(rtg.port, rtg.hostname);
-  var client = require('redis').createClient(process.env.REDIS_URL)
+// if (process.env.REDIS_URL) {
+//   // var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+//   // var redis = require("redis").createClient(rtg.port, rtg.hostname);
+//   var client = require('redis').createClient(process.env.REDIS_URL)
 
-  redis.auth(rtg.auth.split(":")[1]);
-} else {
-  const REDIS_PORT = process.env.REDIS_PORT || 6379
-  // var redis = require("redis").createClient();
-  const client = redis.createClient(REDIS_PORT)
-}
+//   redis.auth(rtg.auth.split(":")[1]);
+// } else {
+//   const REDIS_PORT = process.env.REDIS_PORT || 6379
+//   // var redis = require("redis").createClient();
+//   const client = redis.createClient(REDIS_PORT)
+// }
 
 const redisAuth = process.env.REDIS_AUTH || null
 const PORT = process.env.PORT || 5000
-// const REDIS_PORT = process.env.REDIS_PORT || 6379
+const REDIS_PORT = process.env.REDIS_URL || 6379
+
+var client = require('redis').createClient(REDIS_PORT)
 
 
 
