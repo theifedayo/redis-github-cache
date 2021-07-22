@@ -4,12 +4,15 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "mocha"
   },
   "engines": {
     "node": "14.15.4"
   },
   "dependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "connect-redis": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
@@ -21,10 +24,14 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "less-middleware": "~2.2.1",
+    "mocha": "^9.0.2",
+    "mongoose": "^5.13.3",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.1",
     "redis": "^3.0.2",
-    "response-time": "^2.3.2"
+    "redis-cli": "^2.1.0",
+    "response-time": "^2.3.2",
+    "supertest": "^6.1.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
