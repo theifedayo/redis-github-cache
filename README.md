@@ -1,6 +1,6 @@
 
 # Node.js Github Repositories.
-[![Build Status](https://travis-ci.com/theifedayo/redis-github-cache.svg?branch=master)](https://travis-ci.com/theifedayo/redis-github-cache)
+
 
 ### Description
 This repository shows how redis can be used with nodejs for caching data.
