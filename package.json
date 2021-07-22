@@ -7,7 +7,7 @@
     "dev": "nodemon app.js"
   },
   "engines": {
-    "node": "12.18.0"
+    "node": "14.15.4"
   },
   "dependencies": {
     "connect-redis": "^5.0.0",
